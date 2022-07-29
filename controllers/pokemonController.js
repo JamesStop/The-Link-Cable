@@ -24,11 +24,7 @@ router.get('/:id', (req, res, next) => {
 		.catch(next);
 });
 
-router.post('/', (req, res, next) => {
-	Pokemon.create(req.body)
-		.then((pokemon) => res.json(pokemon))
-		.catch(next);
-});
+
 
 router.patch('/:id', (req, res, next) => {
     Pokemon.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
