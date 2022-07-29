@@ -2,6 +2,7 @@
 
 //------- import mongoose -------
 const mongoose = require('../db/connection.js');
+const PokemonSchema = require('./Pokemon')
 
 //------- create schema function -------
 const TeamSchema = new mongoose.Schema({

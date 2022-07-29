@@ -12,24 +12,29 @@ const Team = require('../models/Team');
 //------- router functions -------
 
 //(.get , .post , .put , .patch , .delete)
-router.get('/', (req, res, next) => {
-	Pokemon.find({})
-		.then((pokemon) => res.json(pokemon))
-		.catch(next);
-});
+
 
 router.get('/:id', (req, res, next) => {
-	Pokemon.findById(req.params.id)
-		.then((pokemon) => res.json(pokemon))
+    const id = req.params.id;
+	Team.findOne({'pokemons._id': id})
+        .then((team) => {
+            const pokemon = team.pokemons.id(id)
+            return res.json(pokemon)
+        })
 		.catch(next);
 });
 
-
-
 router.patch('/:id', (req, res, next) => {
-    Pokemon.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
-		.then((pokemon) => res.json(pokemon))
-		.catch(next);
+    const id = req.params.id;
+    const pokemonData = req.body;
+    Team.findOne({ 'pokemons._id': id })
+			.then((team) => {
+				const pokemon = team.pokemons.id(id);
+				pokemon.set(pokemonData);
+				return team.save();
+			})
+			.then(() => res.sendStatus(204).json())
+			.catch(next);
 });
 
 //put pokemon in team
@@ -48,8 +53,13 @@ router.post('/', (req, res, next) => {
 
 
 router.delete('/:id', (req, res, next) => {
-	Pokemon.findOneAndDelete({ _id: req.params.id })
-		.then((pokemon) => res.json(pokemon))
+    const id = req.params.id;
+	Team.findOne({ 'pokemons._id': id })
+		.then((team) => {
+			team.pokemons.id(id).remove();
+			return team.save();
+		})
+		.then(() => res.sendStatus(204))
 		.catch(next);
 });
 

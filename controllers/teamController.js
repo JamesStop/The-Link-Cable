@@ -13,20 +13,12 @@ const Team = require('../models/Team');
 //(.get , .post , .put , .patch , .delete)
 router.get('/', (req, res, next) => {
 	Team.find({})
-		.populate({
-			path: 'pokemons',
-			model: 'Pokemon',
-		})
 		.then((team) => res.json(team))
 		.catch(next);
 });
 
 router.get('/:id', (req, res, next) => {
 	Team.findById(req.params.id)
-		.populate({
-			path: 'pokemons',
-			model: 'Pokemon',
-		})
 		.then((team) => res.json(team))
 		.catch(next);
 });
