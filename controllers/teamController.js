@@ -38,13 +38,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.patch('/:id', (req, res, next) => {
-
-    const newPokemon = req.body
-
-	Team.findOneAndUpdate({ _id: req.params.id }, { new: true })    
-        .then((team) => {
-            
-        })
+	Team.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
 		.then((team) => res.json(team))
 		.catch(next);
 });
