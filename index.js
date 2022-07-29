@@ -38,11 +38,11 @@ app.get('/examples', (req, res) => {
 
 // ------ import & use controller  -------
 
-const roomController = require('./controllers/roomController');
-app.use('/api/rooms', roomController);
+const teamController = require('./controllers/teamController');
+app.use('/api/teams', teamController);
 
-const guestController = require('./controllers/guestController');
-app.use('/api/guests', guestController);
+const pokemonController = require('./controllers/pokemonController');
+app.use('/api/pokemon', pokemonController);
 
 /* END CONTROLLERS HERE -- */
 // ------  app.use err ------

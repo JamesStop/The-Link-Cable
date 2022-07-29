@@ -6,12 +6,7 @@ const mongoose = require('../db/connection.js');
 //------- create schema function -------
 const TeamSchema = new mongoose.Schema({
 	name: String,
-	pokemons: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Pokemon',
-		},
-	],
+	pokemons: [PokemonSchema],
 });
 
 //------- instantiate the model w/ schema -------
