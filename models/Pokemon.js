@@ -9,6 +9,22 @@ const PokemonSchema = new mongoose.Schema({
 	nickname: String,
 	speciesUrl: String,
 	formUrl: String,
+	level: Number,
+	ability: {
+		name: String,
+		effect: String,
+	},
+	nature: {
+		name: String,
+		increasedStat: {
+			name: String,
+			url: String,
+		},
+		decreasedStat: {
+			name: String,
+			url: String,
+		},
+	},
 });
 
 //------- instantiate the model w/ schema -------
