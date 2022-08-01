@@ -9,8 +9,9 @@ const router = express.Router();
 // POST /api/signup
 router.post('/signup', async (req, res, next) => {
 	try {
-		const hashedPassword = await bcrypt.hash(req.body.password, 10);
+		const hashedPassword = await bcrypt.hash(req.body.password, 5);
 		const newUser = await User.create({
+			username: req.body.username,
 			password: hashedPassword,
 			email: req.body.email,
 		});
@@ -24,9 +25,9 @@ router.post('/signup', async (req, res, next) => {
 // SIGN IN
 // POST /api/signin
 router.post('/signin', (req, res, next) => {
-	User.findOne({ email: req.body.email })
+	User.findOne({ username: req.body.username })
 		// Pass the user and the request to createUserToken
-		.then((user) => createUserToken(req, user))
+		.then((user) => {if (bcrypt.compareSync(req.body.password, user.password)) {return res.json(user)}})
 		// createUserToken will either throw an error that
 		// will be caught by our error handler or send back
 		// a token that we'll in turn send to the client.

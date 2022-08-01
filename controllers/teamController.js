@@ -4,6 +4,8 @@ const express = require('express');
 
 //------- import router -------
 const router = express.Router();
+// const { requireToken } = require('../middleware/auth');
+// const { handleValidateOwnership } = require('../middleware/custom_errors');
 
 //------- import model -------
 const Team = require('../models/Team');
@@ -17,7 +19,7 @@ router.get('/', (req, res, next) => {
 		.catch(next);
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', async(req, res, next) => {
 	Team.findById(req.params.id)
 		.then((team) => res.json(team))
 		.catch(next);
