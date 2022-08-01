@@ -5,6 +5,11 @@ const mongoose = require('../db/connection.js');
 
 //------- create schema function -------
 const PokemonSchema = new mongoose.Schema({
+	owner: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
+		required: true,
+	},
 	name: String,
 	nickname: String,
 	speciesUrl: String,
