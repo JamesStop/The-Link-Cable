@@ -22,12 +22,16 @@ app.use(express.urlencoded({ extended: true }));
 // ------  app.use enable cores  ------
 app.use(cors());
 
+
+const requestLogger = require('./middleware/request_logger');
+app.use(requestLogger);
+
 //= ===============
 // ROUTES
 //= ===============
 // ------  app.get redirect -------
-app.get('/examples', (req, res) => {
-	res.redirect('/examples');
+app.get('/', (req, res) => {
+	res.redirect('/api');
 });
 
 //= ===============
@@ -38,11 +42,14 @@ app.get('/examples', (req, res) => {
 
 // ------ import & use controller  -------
 
-const roomController = require('./controllers/roomController');
-app.use('/api/rooms', roomController);
+const teamController = require('./controllers/teamController');
+app.use('/api/teams', teamController);
 
-const guestController = require('./controllers/guestController');
-app.use('/api/guests', guestController);
+const pokemonController = require('./controllers/pokemonController');
+app.use('/api/pokemon', pokemonController);
+
+const userController = require('./controllers/usersController');
+app.use('/api', userController);
 
 /* END CONTROLLERS HERE -- */
 // ------  app.use err ------
@@ -53,6 +60,9 @@ app.use((err, req, res, next) => {
 });
 
 app.set('port', process.env.PORT || 1738);
+
+const { handleErrors } = require('./middleware/custom_errors');
+app.use(handleErrors);
 
 // ----- start server app.listen --------
 app.listen(app.get('port'), () => {
