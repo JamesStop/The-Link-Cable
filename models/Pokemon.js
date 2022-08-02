@@ -30,6 +30,50 @@ const PokemonSchema = new mongoose.Schema({
 			url: String,
 		},
 	},
+	stats: {
+		health: {
+			base: Number,
+			nature: Boolean,
+			iv: Number,
+			ev: Number,
+			total: Number,
+		},
+		attack: {
+			base: Number,
+			nature: Boolean,
+			iv: Number,
+			ev: Number,
+			total: Number,
+		},
+		defense: {
+			base: Number,
+			nature: Boolean,
+			iv: Number,
+			ev: Number,
+			total: Number,
+		},
+		sattack: {
+			base: Number,
+			nature: Boolean,
+			iv: Number,
+			ev: Number,
+			total: Number,
+		},
+		sdefense: {
+			base: Number,
+			nature: Boolean,
+			iv: Number,
+			ev: Number,
+			total: Number,
+		},
+		speed: {
+			base: Number,
+			nature: Boolean,
+			iv: Number,
+			ev: Number,
+			total: Number,
+		},
+	},
 });
 
 //------- instantiate the model w/ schema -------
