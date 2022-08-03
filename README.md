@@ -19,8 +19,7 @@ This is the backend for [The Masterball](https://cosmic-croissant-fd8656.netlify
 
 ## Getting Started
 
-1. Run `node db/seed.js` to populate your database with seed data.
-2. Run `nodemon index.js` to start your development server.
+1. Run `nodemon index.js` to start your development server.
    Happy coding!!!!
 
 ## API Endpoints
